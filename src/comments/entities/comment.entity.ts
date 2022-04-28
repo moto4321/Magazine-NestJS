@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -29,12 +30,12 @@ export class Comment {
   deleted_at: Date;
 
   @ManyToOne((type) => Content, (content) => content.comments, {
-    onDelete: 'CASCADE',
+    eager: false,
   })
   content: Content;
 
   @ManyToOne((type) => User, (user) => user.comments, {
-    onDelete: 'CASCADE',
+    eager: false,
   })
   user: User;
 }

@@ -7,6 +7,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -54,12 +55,12 @@ export class User extends BaseEntity {
   }
 
   @OneToMany((type) => Comment, (comment) => comment.user, {
-    onDelete: 'CASCADE',
+    eager: true,
   })
   comments: Comment[];
 
   @OneToMany((type) => Content, (content) => content.user, {
-    onDelete: 'CASCADE',
+    eager: true,
   })
   contents: Content[];
 }
