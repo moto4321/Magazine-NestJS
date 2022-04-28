@@ -18,12 +18,12 @@ export class ContentRepository extends Repository<Content> {
   }
 
   async updateContent(
-    id: number,
+    content_id: number,
     updateContentDto: UpdateContentDto,
   ): Promise<Content> {
     const { content, image_url } = updateContentDto;
     return this.save({
-      id,
+      content_id,
       content,
       image_url,
     });

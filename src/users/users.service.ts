@@ -44,9 +44,7 @@ export class UsersService {
     }
   }
 
-  async loginUser(
-    signinUserDto: SigninUserDto,
-  ): Promise<{ accessToken: string }> {
+  async loginUser(signinUserDto: SigninUserDto): Promise<{ token: string }> {
     const { email, password } = signinUserDto;
     const user = await this.userRepository.findOne({
       select: ['id', 'email', 'nickname', 'password'],
@@ -55,16 +53,15 @@ export class UsersService {
       },
     });
 
-    const { id, nickname } = user;
-
-    if (user && (await bcrypt.compare(password, user.password))) {
+    if (!user) {
+      throw new UnauthorizedException('login failed');
+    } else if (user && (await bcrypt.compare(password, user.password))) {
+      const { id, nickname } = user;
       // 유저 토큰 생성 ( Secret + Payload )
       const payload = { id, email, nickname };
-      const accessToken = await this.jwtService.sign(payload);
+      const token = await this.jwtService.sign(payload);
 
-      return { accessToken };
-    } else {
-      throw new UnauthorizedException('login failed');
+      return { token };
     }
   }
 }

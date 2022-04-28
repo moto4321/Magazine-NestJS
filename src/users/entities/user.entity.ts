@@ -7,14 +7,17 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { InternalServerErrorException } from '@nestjs/common';
+import { Comment } from 'src/comments/entities/comment.entity';
+import { Content } from 'src/contents/entities/content.entity';
 
 @Entity()
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'user_id' })
   id: number;
 
   @IsEmail()
@@ -49,4 +52,14 @@ export class User extends BaseEntity {
       throw new InternalServerErrorException();
     }
   }
+
+  @OneToMany((type) => Comment, (comment) => comment.user, {
+    onDelete: 'CASCADE',
+  })
+  comments: Comment[];
+
+  @OneToMany((type) => Content, (content) => content.user, {
+    onDelete: 'CASCADE',
+  })
+  contents: Content[];
 }

@@ -22,7 +22,11 @@ export class ContentsController {
   @Post()
   create(@Body() createContentDto: CreateContentDto): Promise<Content> {
     this.logger.verbose(`trying to create a content`);
-    return this.contentsService.createContent(createContentDto);
+    try {
+      return this.contentsService.createContent(createContentDto);
+    } catch (error) {
+      return error;
+    }
   }
 
   @Get()
@@ -31,22 +35,22 @@ export class ContentsController {
     return this.contentsService.getAllContents();
   }
 
-  @Get(':id')
-  getOneContent(@Param('id') contentId: number): Promise<Content> {
-    this.logger.verbose(`trying to get a content by id ${contentId}`);
-    return this.contentsService.getOneContent(contentId);
+  @Get(':content_id')
+  getOneContent(@Param('content_id') content_id: number): Promise<Content> {
+    this.logger.verbose(`trying to get a content by id ${content_id}`);
+    return this.contentsService.getOneContent(content_id);
   }
 
-  @Patch(':id')
+  @Patch(':content_id')
   updateContent(
-    @Param('id') contentId: number,
+    @Param('content_id') content_id: number,
     @Body() updateContentDto: UpdateContentDto,
   ) {
-    return this.contentsService.updateContent(contentId, updateContentDto);
+    return this.contentsService.updateContent(content_id, updateContentDto);
   }
 
-  @Delete(':id')
-  removeContent(@Param('id') id: number) {
-    return this.contentsService.removeContent(id);
+  @Delete(':content_id')
+  removeContent(@Param('content_id') content_id: number) {
+    return this.contentsService.removeContent(content_id);
   }
 }

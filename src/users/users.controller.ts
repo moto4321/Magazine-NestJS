@@ -23,9 +23,7 @@ export class UsersController {
   }
 
   @Post('signin')
-  login(
-    @Body() signinUserDto: SigninUserDto,
-  ): Promise<{ accessToken: string }> {
+  login(@Body() signinUserDto: SigninUserDto): Promise<{ token: string }> {
     return this.usersService.loginUser(signinUserDto);
   }
 

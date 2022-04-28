@@ -12,38 +12,46 @@ export class ContentsService {
     private contentRepository: ContentRepository,
   ) {}
 
-  createContent(createContentDto: CreateContentDto) {
-    return this.contentRepository.createContent(createContentDto);
+  createContent(createContentDto: CreateContentDto): Promise<Content> {
+    try {
+      return this.contentRepository.createContent(createContentDto);
+    } catch (error) {
+      return error;
+    }
   }
 
   async getAllContents(): Promise<Content[]> {
-    return this.contentRepository.find();
+    try {
+      return this.contentRepository.find();
+    } catch (error) {
+      return error;
+    }
   }
 
-  async getOneContent(id: number): Promise<Content> {
-    const content = await this.contentRepository.findOne(id);
+  async getOneContent(content_id: number): Promise<Content> {
+    const content = await this.contentRepository.findOne(content_id);
     if (!content) {
-      throw new NotFoundException(`content id ${id} not found`);
+      throw new NotFoundException(`content id ${content_id} not found`);
     }
     return content;
   }
 
   async updateContent(
-    id: number,
+    content_id: number,
     updateContentDto: UpdateContentDto,
   ): Promise<Content> {
-    const content = await this.getOneContent(id);
+    const content = await this.getOneContent(content_id);
     if (content) {
       // await this.contentRepository.update(id, updateContentDto);
-      return this.contentRepository.updateContent(id, updateContentDto);
+      return this.contentRepository.updateContent(content_id, updateContentDto);
     }
   }
 
-  async removeContent(id: number): Promise<void> {
-    const result = await this.contentRepository.delete(id);
+  async removeContent(content_id: number): Promise<void> {
+    const result = await this.contentRepository.delete(content_id);
 
     if (result.affected === 0) {
-      throw new NotFoundException(`Can't find Content with id ${id}`);
+      throw new NotFoundException(`Can't find Content with id ${content_id}`);
     }
   }
 }
