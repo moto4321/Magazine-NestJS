@@ -12,9 +12,13 @@ export class ContentsService {
     private contentRepository: ContentRepository,
   ) {}
 
-  createContent(createContentDto: CreateContentDto): Promise<Content> {
+  createContent(
+    file: object,
+    createContentDto: CreateContentDto,
+  ): Promise<Content> {
     try {
-      return this.contentRepository.createContent(createContentDto);
+      const filePath = file['path'];
+      return this.contentRepository.createContent(filePath, createContentDto);
     } catch (error) {
       return error;
     }

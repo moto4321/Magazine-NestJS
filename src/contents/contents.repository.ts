@@ -5,12 +5,15 @@ import { UpdateContentDto } from './dto/update-content.dto';
 
 @EntityRepository(Content)
 export class ContentRepository extends Repository<Content> {
-  async createContent(createContentDto: CreateContentDto): Promise<Content> {
-    const { content, image_url } = createContentDto;
+  async createContent(
+    filePath: string,
+    createContentDto: CreateContentDto,
+  ): Promise<Content> {
+    const { content } = createContentDto;
 
     const newContent = this.create({
       content,
-      image_url,
+      image_url: filePath,
     });
 
     await this.save(newContent);

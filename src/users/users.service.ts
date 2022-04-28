@@ -37,6 +37,9 @@ export class UsersService {
     try {
       // await this.userRepository.save(signupUserDto);
       await this.userRepository.save(User.create(signupUserDto));
+      return {
+        ok: true,
+      };
     } catch (error) {
       return {
         ...error,
