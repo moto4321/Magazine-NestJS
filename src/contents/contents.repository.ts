@@ -19,7 +19,6 @@ export class ContentRepository extends Repository<Content> {
     });
 
     await this.save(newContent);
-    // await this.save({ ...newContent, user_id });
     return newContent;
   }
 
