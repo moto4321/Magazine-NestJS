@@ -8,6 +8,7 @@ import { typeORMConfig } from '../ormconfig';
 import { ContentsModule } from './contents/contents.module';
 import { UsersModule } from './users/users.module';
 import { CommentsModule } from './comments/comments.module';
+import { MessagesModule } from './messages/messages.module';
 import * as config from 'config';
 
 const jwtConfig = config.get('jwt');
@@ -26,6 +27,7 @@ const jwtConfig = config.get('jwt');
     ContentsModule,
     UsersModule,
     CommentsModule,
+    MessagesModule,
   ],
   controllers: [AppController],
   providers: [],
