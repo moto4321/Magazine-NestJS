@@ -9,7 +9,7 @@ export class ContentRepository extends Repository<Content> {
   async createContent(
     user: User,
     filePath: string,
-    createContentDto: CreateContentDto,
+    createContentDto: CreateContentDto
   ): Promise<Content> {
     const { content } = createContentDto;
     const newContent = this.create({
@@ -25,7 +25,7 @@ export class ContentRepository extends Repository<Content> {
   async updateContent(
     content_id: number,
     filePath: string,
-    updateContentDto: UpdateContentDto,
+    updateContentDto: UpdateContentDto
   ): Promise<Content> {
     const { content } = updateContentDto;
     return this.save({

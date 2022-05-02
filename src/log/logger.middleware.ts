@@ -15,7 +15,7 @@ export class LoggerMiddleware implements NestMiddleware {
     const _url = JSON.stringify(tempUrl ? tempUrl : {});
 
     loggerService.log(
-      `${_url} ${_headers} ${_query} ${_body}`.replace(/\\/, ''),
+      `${_url} ${_headers} ${_query} ${_body}`.replace(/\\/, '')
     );
     next();
   }

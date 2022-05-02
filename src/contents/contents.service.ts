@@ -10,20 +10,20 @@ import { User } from 'src/users/entities/user.entity';
 export class ContentsService {
   constructor(
     @InjectRepository(ContentRepository)
-    private contentRepository: ContentRepository,
+    private contentRepository: ContentRepository
   ) {}
 
   createContent(
     user: User,
     file: object,
-    createContentDto: CreateContentDto,
+    createContentDto: CreateContentDto
   ): Promise<Content> {
     try {
       const filePath = file['path'];
       return this.contentRepository.createContent(
         user,
         filePath,
-        createContentDto,
+        createContentDto
       );
     } catch (error) {
       return error;
@@ -49,7 +49,7 @@ export class ContentsService {
   async updateContent(
     content_id: number,
     file: object,
-    updateContentDto: UpdateContentDto,
+    updateContentDto: UpdateContentDto
   ): Promise<Content> {
     const content = await this.getOneContent(content_id);
     const filePath = file['path'];
@@ -58,7 +58,7 @@ export class ContentsService {
       return this.contentRepository.updateContent(
         content_id,
         filePath,
-        updateContentDto,
+        updateContentDto
       );
     }
   }

@@ -19,8 +19,17 @@ export class UsersService {
   constructor(
     @InjectRepository(UserRepository)
     private userRepository: Repository<User>,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
+
+  googleLogin(req) {
+    if (!req.user) {
+      return 'no user from google';
+    }
+    return {
+      user: req.user,
+    };
+  }
 
   async createUser(signupUserDto: SignupUserDto) {
     const isExist = await this.userRepository.findOne({

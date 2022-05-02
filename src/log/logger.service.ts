@@ -15,7 +15,7 @@ export class LoggerService implements LS {
         json(),
         timestamp({ format: 'isoDateTime' }),
         ms(),
-        prettyPrint(),
+        prettyPrint()
       ),
       defaultMeta: { service },
       transports: [
@@ -32,7 +32,7 @@ export class LoggerService implements LS {
 
         new winston.transports.File({
           filename: `application-${moment(new Date()).format(
-            'YYYY-MM-DD',
+            'YYYY-MM-DD'
           )}.log`,
           dirname: 'logs',
           maxsize: 5000000,

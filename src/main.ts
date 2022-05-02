@@ -14,7 +14,7 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
-    }),
+    })
   );
   app.use(cookieParser());
   const port = serverConfig.port;

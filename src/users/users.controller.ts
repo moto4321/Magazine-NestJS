@@ -9,6 +9,7 @@ import {
   UseGuards,
   Res,
   Response,
+  Get,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { SignupUserDto } from './dto/signup-user.dto';
@@ -19,6 +20,16 @@ import { response } from 'express';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Get()
+  @UseGuards(AuthGuard('google'))
+  async googleAuth(@Req() req) {}
+
+  @Get('auth/google/callback')
+  @UseGuards(AuthGuard('google'))
+  googleAuthRedirect(@Req() req) {
+    return this.usersService.googleLogin(req);
+  }
 
   @Post('signup')
   create(@Body() signupUserDto: SignupUserDto): Promise<void> {

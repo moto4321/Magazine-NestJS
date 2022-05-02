@@ -39,13 +39,13 @@ export class ContentsController {
       maxFileSize: 500000,
       fileCount: 1,
       allowFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
-    }),
+    })
   )
   async create(
     @Req() req: Request,
     @UploadedFile() file: Express.Multer.File,
     @Body()
-    createContentDto: CreateContentDto,
+    createContentDto: CreateContentDto
   ): Promise<Content> {
     const user_id = req['user'].id;
     const user: User = req['user'];
@@ -77,17 +77,17 @@ export class ContentsController {
       maxFileSize: 500000,
       fileCount: 1,
       allowFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
-    }),
+    })
   )
   updateContent(
     @UploadedFile() file: Express.Multer.File,
     @Param('content_id') content_id: number,
-    @Body() updateContentDto: UpdateContentDto,
+    @Body() updateContentDto: UpdateContentDto
   ) {
     return this.contentsService.updateContent(
       content_id,
       file,
-      updateContentDto,
+      updateContentDto
     );
   }
 

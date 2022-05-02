@@ -30,7 +30,7 @@ export const customFileIntercept = (options: {
         path: string;
         buffer: Buffer;
       },
-      callback: (error: Error | null, acceptFile: boolean) => void,
+      callback: (error: Error | null, acceptFile: boolean) => void
     ) {
       if (!options.allowFileTypes.includes(file.mimetype))
         return callback(new BadRequestException('invalid file type.'), false);

@@ -28,7 +28,7 @@ describe('ContentsService', () => {
 
     contentService = module.get<ContentsService>(ContentsService);
     contentRepository = module.get<MockRepository<Content>>(
-      getRepositoryToken(Content),
+      getRepositoryToken(Content)
     );
   });
 
