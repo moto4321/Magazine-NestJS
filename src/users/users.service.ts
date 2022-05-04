@@ -31,6 +31,15 @@ export class UsersService {
     };
   }
 
+  kakaoLogin(req) {
+    if (!req.user) {
+      return 'no user from kakao';
+    }
+    return {
+      user: req.user,
+    };
+  }
+
   async createUser(signupUserDto: SignupUserDto) {
     const isExist = await this.userRepository.findOne({
       email: signupUserDto.email,
