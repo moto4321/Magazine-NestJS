@@ -11,7 +11,7 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
       // clientId: kakaoConfig.clientID,
       // callbackURL: kakaoConfig.callbackURL,
       clientID: kakaoConfig.clientID,
-      redirectURL: kakaoConfig.redirectURL,
+      callbackURL: kakaoConfig.redirectURL,
     });
   }
 
